@@ -13,11 +13,20 @@ pip install pygametext
 
 
 ## Elements
-`pgt.button(x,y,width,height,buttonColor,"Text",textColor,onClickFunction,onClickArguments,layer)` -> Returns True
-`pgt.switch(x,y,width,height,buttonColor,"Text",textColor,activeFunction,activeArguments,layer)` -> Returns True
-`pgt.checkbox(x,y,scale,color,activeFunction,activeArguments,layer)` -> Returns True
-`pgt.text(x,y,"Text",textColor,textSize,layer)` -> Returns True
-`pgt.textbox(x,y,width,height,textColor,layer)` -> Returns True
+`pgt.button(x,y,width,height,buttonColor,"Text",textColor,onClickFunction,onClickArguments,layer)`
+-> Returns True
+
+`pgt.switch(x,y,width,height,buttonColor,"Text",textColor,activeFunction,activeArguments,layer)`
+-> Returns True
+
+`pgt.checkbox(x,y,scale,color,activeFunction,activeArguments,layer)`
+-> Returns True
+
+`pgt.text(x,y,"Text",textColor,textSize,layer)`
+-> Returns True
+
+`pgt.textbox(x,y,width,height,textColor,layer)`
+-> Returns True
 
 
 ## Process inputs and events
@@ -29,11 +38,15 @@ This function needs to be called if you want that the elements on specified laye
 `pgt.draw(layer)`
 
 ## Utitilty functions
-`pgt.getLayer(layer)` -> Returns list of PGT Objects on specified Layer
-`pgt.clear(id,layer)` -> Returns True or False
-`pgt.rebuild(layer)` -> Returns True
+`pgt.getLayer(layer)`
+-> Returns list of PGT Objects on specified Layer
 
-# Example Code
+`pgt.clear(id,layer)`
+-> Returns True or False
+
+`pgt.rebuild(layer)`
+-> Returns True
+
 ``` python
 import pygame
 import pygametext
