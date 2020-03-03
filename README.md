@@ -33,6 +33,7 @@ This function needs to be called if you want that the elements on specified laye
 `pgt.clear(id,layer)` -> Returns True or False
 `pgt.rebuild(layer)` -> Returns True
 
+# Example Code
 ``` python
 import pygame
 import pygametext
