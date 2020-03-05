@@ -25,6 +25,9 @@ pip install pygametext
 `pgt.text(x,y,"Text",textColor,textSize,layer)`
 -> Returns True
 
+`pgt.square(x,y,width,height,color,layer)`
+-> Returns True
+
 `pgt.textbox(x,y,width,height,textColor,layer)`
 -> Returns True
 
