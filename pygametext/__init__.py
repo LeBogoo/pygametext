@@ -1,12 +1,11 @@
 import pygame as pg
-import colorsys as cs
 pg.font.init()
 
 class NoElementToDelete(Exception):
 	pass
 
 class PGT:
-	def none():
+	def none(x):
 		pass
 
 	def __init__(self,screen):
@@ -17,11 +16,20 @@ class PGT:
 		for i in range(0,101):
 			self.layers.append([])
 #		(x,y,width,height,color,text,action,layer)
+	def square(self,x,y,w,h,c,l = 0):
+		sqr = PGT.Square(self.screen,x,y,w,h,c,self.lastID)
+		self.layers[l].append(sqr)
+		self.lastID += 1
+
+	def text(self,x,y,t,tc,ts=14,l = 0):
+		txt = PGT.Text(self.screen,x,y,t,tc,ts,self.lastID)
+		self.layers[l].append(txt)
+		self.lastID += 1
+
 	def button(self,x,y,w,h,c,t,tc,a,p,l = 0):
 		btn = PGT.Button(self.screen,x,y,w,h,c,t,tc,a,p,self.lastID)
 		self.layers[l].append(btn)
 		self.lastID += 1
-
 
 	def switch(self,x,y,w,h,c,t,tc,a,p,l = 0):
 		sw = PGT.Switch(self.screen,x,y,w,h,c,t,tc,a,p,self.lastID)
@@ -31,11 +39,6 @@ class PGT:
 	def checkbox(self,x,y,s,c,a,p,l = 0):
 		cb = PGT.Checkbox(self.screen,x,y,s,c,a,p,self.lastID)
 		self.layers[l].append(cb)
-		self.lastID += 1
-
-	def text(self,x,y,t,tc,ts=14,l = 0):
-		txt = PGT.Text(self.screen,x,y,t,tc,ts,self.lastID)
-		self.layers[l].append(txt)
 		self.lastID += 1
 
 	def textbox(self,x,y,w,h,tc, l = 0):
@@ -82,6 +85,27 @@ class PGT:
 		def draw(self):
 			pass
 
+
+	class Square():
+		def __init__(self,screen,x,y,w,h,c,i):
+			self.screen = screen
+			self.x = x
+			self.y = y
+			self.w = w
+			self.h = h
+			self.c = c
+			self.id = i
+			self.active = False
+
+		def update(self,events):
+			pass
+
+		def draw(self):
+			square = pg.Surface((self.w,self.h)).convert_alpha()
+			square.fill(self.c)
+			self.screen.blit(square, (self.x,self.y))
+				
+
 	class Button():
 		def __init__(self,screen,x,y,w,h,c,t,tc,a,p,i):
 			self.screen = screen
@@ -91,10 +115,6 @@ class PGT:
 			self.w = w
 			self.h = h
 			self.c = c
-			self.cd = cs.rgb_to_hsv(c[0],c[1],c[2])
-			self.cd = cs.hsv_to_rgb(self.cd[0],self.cd[1]-0.3,self.cd[2])
-			self.ca = cs.rgb_to_hsv(c[0],c[1],c[2])
-			self.ca = cs.hsv_to_rgb(self.ca[0],self.ca[1]-0.3,self.ca[2]-20)
 			self.t = t
 			self.tc = tc
 			self.a = a
@@ -165,10 +185,6 @@ class PGT:
 			self.w = w
 			self.h = h
 			self.c = c
-			self.cd = cs.rgb_to_hsv(c[0],c[1],c[2])
-			self.cd = cs.hsv_to_rgb(self.cd[0],self.cd[1]-0.3,self.cd[2])
-			self.ca = cs.rgb_to_hsv(c[0],c[1],c[2])
-			self.ca = cs.hsv_to_rgb(self.ca[0],self.ca[1]-0.3,self.ca[2]-20)
 			self.t = t
 			self.tc = tc
 			self.a = a
