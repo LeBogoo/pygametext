@@ -1,3 +1,8 @@
+### Changelog:
+* Fixed Bugs
+* Added pgt.square() function (for more information look at the Elements section)
+
+
 # pygametext
 This Package adds UI Elements to PyGame.
 

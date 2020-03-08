@@ -5,7 +5,7 @@ class NoElementToDelete(Exception):
 	pass
 
 class PGT:
-	def none(x):
+	def none(self,x):
 		pass
 
 	def __init__(self,screen):
@@ -296,7 +296,7 @@ class PGT:
 			cbOutline2 = pg.Surface((self.s-1,self.s-1)).convert_alpha()
 			cbInner = pg.Surface((innerSize,innerSize)).convert_alpha()
 
-			cbInner.fill((0,0,0,120))
+			cbInner.fill((0,0,0,40))
 			cbOutline1.fill((0,0,0,50))
 			cbOutline2.fill((0,0,0,50))
 			cbBaseColor.fill((self.c[0],self.c[1],self.c[2],255))
@@ -356,8 +356,8 @@ class PGT:
 			self.validChars = [' ', '!', '"', '$', '%', '&', '(', ')', '+', ',', '-', '.', '/', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', ':', ';', '<', '>', '?', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '[', ']', '{', '}','\\', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '©', 'Ä', 'Ü', 'ß', 'à', 'ä', 'è', 'é', 'ö', 'ü', '–', '’', '“', '„']
 
 			# Internal Textbox vars
-			self.textboxChars = []
-			self.textboxText = ""
+			self.chars = []
+			self.text = ""
 			self.history = []
 
 		def update(self,events):
@@ -380,22 +380,22 @@ class PGT:
 				if self.active:
 					if event.type == pg.KEYDOWN:
 						if event.key == pg.K_BACKSPACE:
-							if len(self.textboxChars) != 0:
-								del self.textboxChars[-1]
-							self.textboxText = ""
-							for char in self.textboxChars:
-								self.textboxText += char
+							if len(self.chars) != 0:
+								del self.chars[-1]
+							self.text = ""
+							for char in self.chars:
+								self.text += char
 						elif event.key == pg.K_RETURN:
-							self.history.append(self.textboxText)
-							self.textboxText = ""
-							del self.textboxChars[:]
+							self.history.append(self.text)
+							self.text = ""
+							del self.chars[:]
 							print(self.history)
 						else:
 							if event.unicode in self.validChars:
-								self.textboxChars.append(event.unicode)
-								self.textboxText = ""
-								for char in self.textboxChars:
-									self.textboxText += char
+								self.chars.append(event.unicode)
+								self.text = ""
+								for char in self.chars:
+									self.text += char
 					elif  event.type == 25:
 						if self.blinker:
 							self.blinker = False
@@ -407,9 +407,9 @@ class PGT:
 				self.w = 10
 			if self.h <= 10:
 				self.h = 10
-			text = self.font.render(self.textboxText, True, self.tc)
+			text = self.font.render(self.text, True, self.tc)
 			base = pg.Surface((self.w,self.h)).convert_alpha()
-			boarder1 = pg.Surface((self.w - 1, self.h - 1)).convert_alpha()
+			boarder1 = pg.Surface((self.w, self.h)).convert_alpha()
 			boarder2 = pg.Surface((self.w - 2, self.h - 2)).convert_alpha()
 			textbox = pg.Surface((self.w-3,self.h-3)).convert_alpha()
 			cursor = pg.Surface((2,self.h - 4)).convert_alpha()
@@ -427,10 +427,10 @@ class PGT:
 				cursor.fill((0,0,0,0))
 
 			base.blit(boarder1,(0,0))
-			base.blit(boarder2,(1,1))
+			base.blit(boarder2,(2,2))
 
 
-			text = self.font.render(self.textboxText, True, self.tc)
+			text = self.font.render(self.text, True, self.tc)
 			textbox.blit(text, (1,0))
 
 			base.blit(textbox,(2,2))
